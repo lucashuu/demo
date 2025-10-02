@@ -6,6 +6,12 @@ import jakarta.persistence.*;
 @Table(name = "users") // 指定映射到数据库中的表名叫 "users"
 public class User {
 
+    // 在User类上面或单独文件中定义Role枚举
+    public enum Role {
+        USER,
+        ADMIN
+    }
+
     @Id // 声明这个字段是主键
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 告诉数据库，这个ID由数据库自动生成（自增）
     private Long id;

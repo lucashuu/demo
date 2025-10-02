@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
-
+import com.example.demo.dto.AuthResponse;
+import com.example.demo.dto.LoginRequest;
 import com.example.demo.userapi.entity.User;
 import com.example.demo.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,10 @@ public class AuthController {
         return authService.register(user);
     }
 
-    // 登录API稍后添加
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
+        String token = authService.login(loginRequest.getUsername(), loginRequest.getPassword());
+        return ResponseEntity.ok(new AuthResponse(token));
+    }
 }
 
